@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Drawer</string>
+    <string name="app_description">A lightweight floating app drawer with smart search functionality. Swipe up or tap the floating button to access your apps instantly.</string>
+    
+    <!-- Main Activity -->
+    <string name="permissions_required">Required Permissions</string>
+    <string name="overlay_permission_status">Overlay Permission:</string>
+    <string name="overlay_permission_granted">✓ Granted</string>
+    <string name="overlay_permission_denied">✗ Required for floating widget</string>
+    <string name="request_overlay_permission">Grant Overlay Permission</string>
+    
+    <string name="accessibility_permission_status">Accessibility Permission:</string>
+    <string name="accessibility_permission_granted">✓ Granted</string>
+    <string name="accessibility_permission_denied">✗ Required for gesture detection</string>
+    <string name="request_accessibility_permission">Grant Accessibility Permission</string>
+    
+    <string name="start_smart_drawer">Start Smart Drawer</string>
+    <string name="restart_smart_drawer">Restart Smart Drawer</string>
+    <string name="smart_drawer_started">Smart Drawer started! Tap the floating icon to open.</string>
+    <string name="floating_widget_disabled">Floating widget is disabled in settings</string>
+    <string name="missing_permissions">Missing Required Permissions</string>
+    <string name="settings">Settings</string>
+    
+    <!-- Floating Widget -->
+    <string name="floating_search_icon">Floating search icon</string>
+    
+    <!-- App Drawer -->
+    <string name="search_apps">Search apps…</string>
+    <string name="no_apps_found">No apps found</string>
+    <string name="loading_apps">Loading apps…</string>
+    <string name="pin_app">Pin App</string>
+    <string name="unpin_app">Unpin App</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Smart Drawer Settings</string>
+    <string name="general_settings">General</string>
+    <string name="widget_settings">Widget</string>
+    <string name="appearance_settings">Appearance</string>
+    
+    <string name="enable_floating_widget">Enable Floating Widget</string>
+    <string name="enable_floating_widget_summary">Show floating search button on screen</string>
+    
+    <string name="enable_swipe_up">Enable Swipe Up Gesture</string>
+    <string name="enable_swipe_up_summary">Open drawer with swipe up gesture on home screen</string>
+    
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode_summary">Use dark theme for app drawer</string>
+    
+    <string name="layout_type">Layout Type</string>
+    <string name="layout_type_summary">Choose between grid or list layout</string>
+    <string name="layout_grid">Grid</string>
+    <string name="layout_list">List</string>
+    
+    <string name="widget_size">Widget Size</string>
+    <string name="widget_size_summary">Size of the floating widget</string>
+    <string name="size_small">Small</string>
+    <string name="size_medium">Medium</string>
+    <string name="size_large">Large</string>
+    
+    <string name="show_system_apps">Show System Apps</string>
+    <string name="show_system_apps_summary">Include system apps in the drawer</string>
+    
+    <string name="reset_widget_position">Reset Widget Position</string>
+    <string name="reset_widget_position_summary">Move widget back to default position</string>
+    <string name="widget_position_reset">Widget position reset</string>
+    
+    <!-- Gesture Detection -->
+    <string name="accessibility_service_description">Smart Drawer uses accessibility service to detect swipe up gestures on the home screen to open the app drawer. No personal data is collected or processed.</string>
+    
+    <!-- Error Messages -->
+    <string name="error_loading_apps">Error loading apps</string>
+    <string name="error_launching_app">Could not launch app</string>
+    <string name="permission_required">Permission required</string>
+    
+    <!-- Voice Search -->
+    <string name="voice_search">Voice Search</string>
+    <string name="speak_now">Speak now...</string>
+    <string name="voice_search_error">Voice search not available</string>
+    
+    <!-- Close/Dismiss -->
+    <string name="close">Close</string>
+    <string name="dismiss">Dismiss</string>
+</resources> 

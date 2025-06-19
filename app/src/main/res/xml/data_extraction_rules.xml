@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Include user preferences -->
+        <include domain="sharedpref" path="smart_drawer_prefs.xml"/>
+        
+        <!-- Exclude sensitive data -->
+        <exclude domain="cache" />
+        <exclude domain="no_backup" />
+    </cloud-backup>
+    
+    <device-transfer>
+        <!-- Transfer user preferences between devices -->
+        <include domain="sharedpref" path="smart_drawer_prefs.xml"/>
+    </device-transfer>
+</data-extraction-rules> 

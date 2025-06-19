@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Include user preferences -->
+    <include domain="sharedpref" path="smart_drawer_prefs.xml"/>
+    
+    <!-- Exclude cache and temporary files -->
+    <exclude domain="cache" />
+    <exclude domain="no_backup" />
+</full-backup-content> 
