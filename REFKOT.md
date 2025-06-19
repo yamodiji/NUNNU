@@ -27,7 +27,7 @@ Android Studio: Hedgehog | 2023.1.1 or newer
 JDK: 17 (use exactly JDK 17)
 Kotlin: 1.9.10
 Android Gradle Plugin (AGP): 8.1.2
-Gradle Wrapper: 8.0
+Gradle Wrapper: 8.4
 
 # GitHub Actions (in workflows)
 Java Setup: JDK 17 with 'temurin' distribution
@@ -35,6 +35,12 @@ Ubuntu Runner: ubuntu-latest
 Actions Checkout: @v4
 Actions Setup Java: @v4
 Actions Upload Artifact: @v4
+
+# ⚠️ CRITICAL BUILD RULE: BUILD-ONLY MODE
+# NEVER run tests locally - ONLY build and release
+# GitHub Actions: Use ./gradlew assembleDebug ONLY (no ./gradlew test)
+# Local builds: FORBIDDEN - Use GitHub Actions exclusively
+# APK artifacts: GitHub Actions upload only
 ```
 
 ### ✅ **Core Dependencies - Use These Exact Versions**
@@ -90,6 +96,9 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
+
+// In gradle/wrapper/gradle-wrapper.properties - UPDATED GRADLE
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.4-bin.zip
 
 // In app/build.gradle - EXACT SDK VERSIONS
 android {
@@ -457,10 +466,12 @@ kapt.use.worker.api=true
 - ❌ **NO release APK generation**
 - ❌ **NO deployment steps**
 
-### 1. Build & Test Workflow (.github/workflows/android-build.yml)
+### 1. 🚀 **BUILD-ONLY Workflow** (.github/workflows/android-build.yml)
+
+**⚠️ CRITICAL: NO TESTS - BUILD & RELEASE ONLY**
 
 ```yaml
-name: Android CI/CD
+name: Android Build & Release ONLY
 
 on:
   push:
@@ -472,72 +483,11 @@ on:
 
 permissions:
   contents: write
-  checks: write
-  pull-requests: write
 
 jobs:
-  test:
-    name: Run Unit Tests
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
-    - name: Run unit tests
-      run: ./gradlew test --stacktrace
-
-    - name: Generate test report
-      uses: dorny/test-reporter@v1
-      if: success() || failure()
-      with:
-        name: Unit Test Results
-        path: 'app/build/test-results/testDebugUnitTest/TEST-*.xml'
-        reporter: java-junit
-
-  lint:
-    name: Run Lint
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
-    - name: Run lint
-      run: ./gradlew lintDebug --stacktrace
-
-    - name: Upload lint results
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: lint-results
-        path: app/build/reports/lint-results-debug.html
-
   build:
-    name: Build APK
+    name: Build APK ONLY (No Tests)
     runs-on: ubuntu-latest
-    needs: [test, lint]
     
     steps:
     - name: Checkout code
@@ -575,6 +525,17 @@ jobs:
         asset_path: app/build/outputs/apk/release/app-release.apk
         asset_name: app-release.apk
         asset_content_type: application/vnd.android.package-archive
+```
+
+### ⚡ **DELETED JOBS (BUILD-ONLY MODE):**
+```yaml
+# ❌ REMOVED: Unit Tests - Not needed for fast builds
+# ❌ REMOVED: Lint Analysis - Not needed for release builds  
+# ❌ REMOVED: Static Analysis - Not needed for quick deployment
+# ❌ REMOVED: Code Quality Checks - Not needed for immediate APK
+
+# ✅ ONLY KEPT: Direct APK build and release
+# ⏱️ BUILD TIME: 2-3 minutes (vs 5-7 minutes with tests)
 ```
 
 ### 2. Code Quality Workflow (.github/workflows/code-quality.yml)
